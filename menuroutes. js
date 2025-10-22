@@ -1,0 +1,19 @@
+import express from "express";
+import MenuItem from "../models/MenuItem.js";
+import { protect } from "../middleware/authMiddleware.js";
+
+const router = express.Router();
+
+router.post("/", protect, async (req, res) => {
+      const menuItem = await MenuItem.create(req.body);
+        res.json(menuItem);
+});
+
+router.get("/:restaurantId", async (req, res) => {
+      const items = await MenuItem.find({ restaurant: req.params.restaurantId });
+        res.json(items);
+});
+
+export default router;
+})
+})

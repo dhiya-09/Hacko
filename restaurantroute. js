@@ -1,0 +1,19 @@
+import express from "express";
+import Restaurant from "../models/Restaurant.js";
+import { protect } from "../middleware/authMiddleware.js";
+
+const router = express.Router();
+
+router.post("/", protect, async (req, res) => {
+      const restaurant = await Restaurant.create({ ...req.body, owner: req.user._id });
+        res.json(restaurant);
+});
+
+router.get("/", async (req, res) => {
+      const restaurants = await Restaurant.find();
+        res.json(restaurants);
+});
+
+export default router;
+})
+})
